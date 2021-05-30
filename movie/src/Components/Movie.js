@@ -12,20 +12,26 @@ const setVoteClass =(vote)=>{
 }
 
 
-const Movie = ({ title, poster_path, overview, vote_average}) =>
-    (<div className="movie">
+const Movie = ({ title, poster_path, overview, vote_average, favouriteComponent, handleFavouritesClick}) =>{
+      const FavouriteComponent = favouriteComponent;
+      return (<div className="movie">
+      <div className="image-container">
         <img src={ poster_path ? (IMG_API + poster_path) :
-                'https://www.indiantelevision.com/sites/default/files/images/tv-images/2021/04/19/img_19042021_181821_800_x_800_pixel.jpg'} 
-                 alt={title} />
+        'https://www.indiantelevision.com/sites/default/files/images/tv-images/2021/04/19/img_19042021_181821_800_x_800_pixel.jpg'} 
+        alt={title} />
         <div className="movie-info">
             <h3>{title}</h3>
             <span className={`tag ${setVoteClass(vote_average)}`} >{vote_average}</span>
         </div>
-
+        <div onClick={handleFavouritesClick} className="overlay d-flex align-items-centre justify-content">
+                <FavouriteComponent/>
+        </div>
+     </div>
         <div className="movie-over">
                 <h2>Overview:</h2>
                 <p>{overview}</p>
         </div>
     </div>
     );
+        }
 export default Movie;
